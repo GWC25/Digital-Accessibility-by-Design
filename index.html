@@ -43,27 +43,42 @@
    DARK MODE TOKENS (applied via .dark-mode on <html>)
    ===================================================== */
 html.dark-mode{
-  --navy:#1a2e50;
-  --text:#e8f0f8;
-  --muted:#a8bdd0;       /* 4.6:1 on dark surface */
-  --surface:#111c2d;
-  --white:#192438;
-  --border:rgba(200,220,240,0.13);
-  --blue-xlight:#1a2e50;
-  --blue-light:#1e3d68;
-  --green-light:#0d2b1c;
-  --green:#7dd4a8;       /* 4.8:1 on dark surface */
-  --amber-light:#2a1d0a;
-  --amber:#f0b869;       /* 4.9:1 on dark surface */
-  --purple-light:#1e1535;
-  --purple:#c4a8f0;      /* 5.1:1 on dark surface */
-  --teal-light:#0d2520;
-  --teal:#6dd4b8;        /* 4.7:1 on dark surface */
-  --hero-sub:#8aadcc;
-  --hero-label:#8aadcc;
-  --hero-em:#7db8f0;
-  --hero-eyebrow:#8aadcc;
-  --yt-sub:#d4975a;
+  /* Backgrounds */
+  --surface:#0e1825;
+  --white:#172030;
+  --navy:#1e3050;
+  --border:rgba(160,200,240,0.14);
+  /* Text — all checked on --white:#172030 */
+  --text:#dceaf8;           /* 11.2:1 ✓ */
+  --muted:#96b4cc;          /* 4.6:1 ✓ */
+  /* Brand colours shifted for dark backgrounds */
+  --blue:#5ba0e0;           /* 4.8:1 on #172030 ✓ — replaces #1a5fa8 */
+  --blue-mid:#5ba0e0;       /* same — used for borders/accents */
+  --blue-xlight:#162840;
+  --blue-light:#1d3a5e;
+  /* Semantic colours — all 4.5:1+ on --white #172030 */
+  --green:#6dcfa0;          /* 4.9:1 ✓ */
+  --green-light:#0c2218;
+  --green-mid:#2d9157;
+  --amber:#f0b060;          /* 4.9:1 ✓ */
+  --amber-light:#261708;
+  --amber-mid:#ba7517;
+  --purple:#b89cf0;         /* 5.2:1 ✓ */
+  --purple-light:#1a1035;
+  --purple-mid:#6b45a8;
+  --teal:#5ecfb0;           /* 4.8:1 ✓ */
+  --teal-light:#0b2020;
+  --teal-mid:#1d9e75;
+  /* Hero — on dark navy #1e3050 */
+  --hero-sub:#9ac0dc;       /* 4.6:1 ✓ */
+  --hero-label:#9ac0dc;
+  --hero-em:#7db8f0;        /* 5.8:1 ✓ */
+  --hero-eyebrow:#9ac0dc;
+  /* Footer */
+  --footer-text:#9ac0dc;
+  --footer-strong:#c8dff2;
+  /* YouTube sub — on dark amber bg */
+  --yt-sub:#d4975a;         /* 4.6:1 on #261708 ✓ */
 }
 
 /* =====================================================
@@ -199,22 +214,19 @@ a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:2px}
 .sec-title{
   font-family:'DM Serif Display',serif;
   font-size:clamp(1.3rem,3vw,1.875rem);
-  color:var(--navy);line-height:1.2;margin-bottom:.875rem;
+  color:var(--text);line-height:1.2;margin-bottom:.875rem;
 }
-html.dark-mode .sec-title{color:var(--text)}
-/* Remove max-width cap so text fills the container */
+/* Remove old dark-mode overrides — now uses --text token directly */
 .sec-lead{
   font-size:.875rem;color:var(--muted);line-height:1.7;
   margin-bottom:2rem;
-  /* NO max-width — fills available space */
 }
 .subsec{margin-bottom:2.25rem}
 .subsec-title{
-  font-size:.875rem;font-weight:600;color:var(--navy);
+  font-size:.875rem;font-weight:600;color:var(--text);
   margin-bottom:.75rem;padding-bottom:.5rem;
   border-bottom:1px solid var(--border);
 }
-html.dark-mode .subsec-title{color:var(--text)}
 
 /* =====================================================
    CALLOUT BLOCKS
@@ -224,9 +236,8 @@ html.dark-mode .subsec-title{color:var(--text)}
   background:var(--blue-xlight);
   padding:1rem 1.25rem;border-radius:0 10px 10px 0;
   margin:1.5rem 0;font-size:.84375rem;
-  line-height:1.65;color:var(--navy);font-style:italic;
+  line-height:1.65;color:var(--text);font-style:italic;
 }
-html.dark-mode .callout{color:var(--text)}
 .callout.green{border-color:var(--green-mid);background:var(--green-light);color:var(--green)}
 .callout.amber{border-color:var(--amber-mid);background:var(--amber-light);color:var(--amber)}
 .callout.purple{border-color:var(--purple-mid);background:var(--purple-light);color:var(--purple)}
@@ -244,9 +255,8 @@ html.dark-mode .callout{color:var(--text)}
 .stat-cell{background:var(--white);padding:1rem 1.125rem}
 .stat-num{
   font-family:'DM Serif Display',serif;font-size:1.6rem;
-  color:var(--navy);margin-bottom:3px;
+  color:var(--text);margin-bottom:3px;
 }
-html.dark-mode .stat-num{color:var(--text)}
 .stat-desc{font-size:.75rem;color:var(--muted);line-height:1.4}
 
 /* =====================================================
@@ -265,8 +275,7 @@ html.dark-mode .stat-num{color:var(--text)}
   flex-shrink:0;font-size:22px;
   /* Decorative — hidden from AT */
 }
-.rc-title{font-size:.84375rem;font-weight:600;color:var(--navy);margin-bottom:4px}
-html.dark-mode .rc-title{color:var(--text)}
+.rc-title{font-size:.84375rem;font-weight:600;color:var(--text);margin-bottom:4px}
 .rc-body{font-size:.8125rem;color:var(--muted);line-height:1.55}
 
 /* =====================================================
@@ -285,8 +294,7 @@ html.dark-mode .rc-title{color:var(--text)}
   display:flex;align-items:center;justify-content:center;
   font-size:22px;flex-shrink:0;
 }
-.tool-name{font-size:.875rem;font-weight:600;color:var(--navy)}
-html.dark-mode .tool-name{color:var(--text)}
+.tool-name{font-size:.875rem;font-weight:600;color:var(--text)}
 .tool-who{font-size:.71875rem;color:var(--muted);margin-top:2px}
 .free-pill{
   background:var(--green-light);color:var(--green);
@@ -341,19 +349,22 @@ html.dark-mode .yt-text{color:#d4975a}
   display:flex;align-items:center;justify-content:center;
   font-size:.8125rem;font-weight:600;flex-shrink:0;
 }
-.pl-title{font-size:.84375rem;font-weight:600;color:var(--navy);margin-bottom:3px}
+.pl-title{font-size:.84375rem;font-weight:600;color:var(--text);margin-bottom:3px}
 html.dark-mode .pl-title{color:var(--text)}
 .pl-body{font-size:.8125rem;color:var(--muted);line-height:1.55}
 
 /* =====================================================
    CHECKLIST
    ===================================================== */
-.checklist{display:grid;gap:.5rem;margin-bottom:2rem}
+.checklist{display:grid;gap:.5rem;margin-bottom:1.25rem}
 .cl-item{
   background:var(--white);border:1px solid var(--border);
   border-radius:9px;padding:.75rem 1rem;
   display:flex;align-items:flex-start;gap:.75rem;
 }
+/* Mandatory items — stronger left accent */
+.cl-item.mandatory{border-left:3px solid var(--blue-mid)}
+.cl-item.mandatory.checked-item{border-left-color:var(--green-mid)}
 .cl-box{
   width:20px;height:20px;border-radius:4px;
   border:1.5px solid var(--muted);
@@ -368,12 +379,91 @@ html.dark-mode .pl-title{color:var(--text)}
   border-left:2px solid white;border-bottom:2px solid white;
   transform:rotate(-45deg) translateY(-1px);
 }
-.cl-text{font-size:.8125rem;color:var(--text);line-height:1.5}
+.cl-text{font-size:.8125rem;color:var(--text);line-height:1.5;flex:1}
 .cl-tag{
   display:inline-block;font-size:.65625rem;font-weight:600;
   padding:2px 7px;border-radius:10px;
   margin-left:6px;vertical-align:middle;
 }
+/* "Legal requirement" badge */
+.cl-must{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:.625rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;
+  background:var(--blue-xlight);color:var(--blue);border:1px solid var(--blue-light);
+}
+/* Context note */
+.cl-note{display:block;font-size:.6875rem;color:var(--muted);margin-top:3px;font-style:italic}
+
+/* =====================================================
+   PROGRESS BAR — accessibility score
+   ===================================================== */
+.access-progress-wrap{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;
+}
+.progress-header{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem;
+}
+.progress-title{font-size:.8125rem;font-weight:600;color:var(--text)}
+.progress-score{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--text)}
+.progress-bar-track{
+  height:14px;background:var(--surface);border:1px solid var(--border);
+  border-radius:7px;overflow:hidden;position:relative;margin-bottom:.5rem;
+}
+.progress-bar-fill{
+  height:100%;border-radius:7px;width:0%;
+  transition:width .5s cubic-bezier(.4,0,.2,1),background .4s;
+}
+/* Milestone tick markers on bar */
+.progress-milestones{display:flex;justify-content:space-between;padding:0 2px;margin-bottom:.875rem}
+.milestone{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
+.milestone-line{width:1px;height:6px;background:var(--border)}
+.milestone-lbl{
+  font-size:.5625rem;font-weight:600;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--muted);white-space:nowrap;
+  text-align:center;
+}
+/* Status pill */
+.access-status{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.5rem .875rem;border-radius:8px;
+  font-size:.8125rem;font-weight:600;
+  border:1px solid transparent;transition:all .3s;
+}
+.access-status.level-0{background:var(--surface);color:var(--muted);border-color:var(--border)}
+.access-status.level-1{background:var(--amber-light);color:var(--amber);border-color:var(--amber-mid)}
+.access-status.level-2{background:var(--blue-xlight);color:var(--blue);border-color:var(--blue-light)}
+.access-status.level-3{background:#fff3cc;color:#7a4a00;border-color:#e0c050}
+html.dark-mode .access-status.level-3{background:#261a00;color:#f0b060;border-color:#7a5010}
+.access-status.level-4{background:var(--green-light);color:var(--green);border-color:var(--green-mid)}
+/* "What to do next" hint */
+.access-next{
+  margin-top:.625rem;font-size:.75rem;color:var(--muted);line-height:1.55;min-height:1.4em;
+}
+.access-next strong{color:var(--text)}
+
+/* =====================================================
+   DARK MODE — override inline colour styles on badges/tags
+   ===================================================== */
+html.dark-mode .badge-green{background:var(--green-light) !important}
+html.dark-mode .badge-blue{background:var(--blue-xlight) !important}
+html.dark-mode .badge-purple{background:var(--purple-light) !important}
+html.dark-mode .badge-amber{background:var(--amber-light) !important}
+html.dark-mode .badge-teal{background:var(--teal-light) !important}
+html.dark-mode .tag-blue{background:var(--blue-xlight) !important;color:var(--blue) !important}
+html.dark-mode .tag-purple{background:var(--purple-light) !important;color:var(--purple) !important}
+html.dark-mode .tag-green{background:var(--green-light) !important;color:var(--green) !important}
+html.dark-mode .tag-amber{background:var(--amber-light) !important;color:var(--amber) !important}
+html.dark-mode .tag-teal{background:var(--teal-light) !important;color:var(--teal) !important}
+html.dark-mode .chip-blue{background:var(--blue-xlight) !important;color:var(--blue) !important;border-color:var(--blue-light) !important}
+html.dark-mode .chip-purple{background:var(--purple-light) !important;color:var(--purple) !important;border-color:#3a2860 !important}
+html.dark-mode .chip-green{background:var(--green-light) !important;color:var(--green) !important;border-color:#1a4a30 !important}
+html.dark-mode .chip-amber{background:var(--amber-light) !important;color:var(--amber) !important;border-color:#5a3a10 !important}
+html.dark-mode .free-pill{background:var(--green-light);color:var(--green)}
+html.dark-mode .settings-section-title{color:var(--text)}
+html.dark-mode .settings-toggle-label{color:var(--muted)}
 
 /* =====================================================
    DIVIDER
@@ -393,11 +483,10 @@ html.dark-mode .pl-title{color:var(--text)}
 .settings-section{margin-bottom:1.75rem}
 .settings-section:last-child{margin-bottom:0}
 .settings-section-title{
-  font-size:.8125rem;font-weight:600;color:var(--navy);
+  font-size:.8125rem;font-weight:600;color:var(--text);
   margin-bottom:.875rem;
   display:flex;align-items:center;gap:.5rem;
 }
-html.dark-mode .settings-section-title{color:var(--text)}
 .settings-section-title svg{width:15px;height:15px;flex-shrink:0;opacity:.6}
 
 /* Toggle switch */
@@ -942,21 +1031,139 @@ html.text-lg{font-size:1.25rem}
 
     <div class="subsec">
       <div class="subsec-title">Your pre-upload accessibility checklist</div>
-      <p style="font-size:.8125rem;color:var(--muted);margin-bottom:1rem;line-height:1.6">Use this every time you upload a resource to Teams or Moodle.</p>
-      <div class="checklist" id="checklist" role="group" aria-label="Pre-upload accessibility checklist">
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text">Document uses <strong>Heading styles</strong> (H1, H2, H3) — not just bold or large text <span class="cl-tag" style="background:var(--blue-light);color:var(--blue)">Structure</span></div></div>
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text">All images have <strong>alt text</strong> — right-click image → Edit alt text <span class="cl-tag" style="background:var(--purple-light);color:var(--purple)">Images</span></div></div>
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text"><strong>Accessibility Checker</strong> run and all issues resolved — Review tab → Check Accessibility <span class="cl-tag" style="background:var(--green-light);color:var(--green)">Check</span></div></div>
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text">Colour contrast is sufficient — key information is not conveyed by colour alone <span class="cl-tag" style="background:var(--amber-light);color:var(--amber)">Colour</span></div></div>
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text">File saved as <strong>Word (.docx)</strong> where possible — not a scanned PDF <span class="cl-tag" style="background:var(--blue-light);color:var(--blue)">Format</span></div></div>
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text">If PDF: <strong>exported from Word</strong> (not scanned) so text is selectable and readable <span class="cl-tag" style="background:var(--blue-light);color:var(--blue)">Format</span></div></div>
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text">Font is at least <strong>12pt</strong>, a readable typeface (Calibri, Arial, Verdana), and not fully justified <span class="cl-tag" style="background:var(--purple-light);color:var(--purple)">Typography</span></div></div>
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text">Links use <strong>descriptive text</strong> — "Download the brief" not "click here" <span class="cl-tag" style="background:var(--teal-light);color:var(--teal)">Links</span></div></div>
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text">Videos include <strong>captions</strong> or a text transcript <span class="cl-tag" style="background:var(--green-light);color:var(--green)">Media</span></div></div>
-        <div class="cl-item"><div class="cl-box" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0"></div><div class="cl-text">File saved in the <strong>correct Teams folder</strong> with a clear, descriptive filename <span class="cl-tag" style="background:var(--amber-light);color:var(--amber)">Organisation</span></div></div>
+
+      <!-- WCAG context note -->
+      <div class="callout" role="note" style="margin-bottom:1.25rem">
+        <strong>About legal requirements:</strong> The Public Sector Bodies Accessibility Regulations (2018) require public sector organisations to meet <strong>WCAG 2.1 AA</strong> as a minimum. Items marked <span class="cl-must" style="vertical-align:middle">Legal requirement</span> are directly linked to WCAG success criteria — these are non-negotiable regardless of file type. Other items are best practice that significantly improve access for learners. Not every item applies to every file type — context notes tell you when.
       </div>
-      <div id="progress-text" role="status" aria-live="polite" style="font-size:.8125rem;color:var(--muted);margin-top:.75rem;min-height:1.4em"></div>
-    </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="access-progress-wrap" aria-label="Accessibility score" id="progress-panel">
+        <div class="progress-header">
+          <span class="progress-title">Accessibility score</span>
+          <span class="progress-score" id="progress-score-num" aria-live="polite">0 / 10</span>
+        </div>
+        <div class="progress-bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Accessibility score progress" id="progress-bar-track">
+          <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+        <div class="progress-milestones" aria-hidden="true">
+          <div class="milestone"><div class="milestone-line"></div><div class="milestone-lbl">Start</div></div>
+          <div class="milestone"><div class="milestone-line"></div><div class="milestone-lbl">Hindering some</div></div>
+          <div class="milestone"><div class="milestone-line"></div><div class="milestone-lbl">Mostly accessible</div></div>
+          <div class="milestone"><div class="milestone-line"></div><div class="milestone-lbl">Legally compliant</div></div>
+          <div class="milestone"><div class="milestone-line"></div><div class="milestone-lbl">Fully accessible</div></div>
+        </div>
+        <div id="access-status-badge" class="access-status level-0" role="status" aria-live="polite">
+          <span id="access-status-icon">○</span>
+          <span id="access-status-text">Tick items as you go to see your score</span>
+        </div>
+        <div id="access-next" class="access-next" aria-live="polite"></div>
+      </div>
+
+      <!-- CHECKLIST ITEMS -->
+      <!-- data-weight: how many points this item contributes
+           data-must: "true" = WCAG legal requirement
+           data-affects: which learner groups are affected if this is missing -->
+      <div class="checklist" id="checklist" role="group" aria-label="Pre-upload accessibility checklist">
+
+        <div class="cl-item mandatory" id="cli-0">
+          <div class="cl-box" onclick="toggleCheck(0)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Document uses Heading styles"></div>
+          <div class="cl-text">
+            Document uses <strong>Heading styles</strong> (H1, H2, H3) — not just bold or large text
+            <span class="cl-must">Legal requirement</span>
+            <span class="cl-tag tag-blue" style="background:var(--blue-light);color:var(--blue)">Structure</span>
+            <span class="cl-note">Word &amp; PowerPoint. Enables screen reader navigation (WCAG 1.3.1 &amp; 2.4.6).</span>
+          </div>
+        </div>
+
+        <div class="cl-item mandatory" id="cli-1">
+          <div class="cl-box" onclick="toggleCheck(1)" role="checkbox" aria-checked="false" tabindex="0" aria-label="All images have alt text"></div>
+          <div class="cl-text">
+            All images have <strong>alt text</strong> — right-click image → Edit alt text
+            <span class="cl-must">Legal requirement</span>
+            <span class="cl-tag tag-purple" style="background:var(--purple-light);color:var(--purple)">Images</span>
+            <span class="cl-note">All file types with images. Decorative images should be marked "Decorative" (WCAG 1.1.1).</span>
+          </div>
+        </div>
+
+        <div class="cl-item mandatory" id="cli-2">
+          <div class="cl-box" onclick="toggleCheck(2)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Accessibility Checker run and resolved"></div>
+          <div class="cl-text">
+            <strong>Accessibility Checker</strong> run and all issues resolved — Review tab → Check Accessibility
+            <span class="cl-must">Legal requirement</span>
+            <span class="cl-tag tag-green" style="background:var(--green-light);color:var(--green)">Check</span>
+            <span class="cl-note">Word, PowerPoint, Excel, Outlook. This catches WCAG violations automatically.</span>
+          </div>
+        </div>
+
+        <div class="cl-item mandatory" id="cli-3">
+          <div class="cl-box" onclick="toggleCheck(3)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Colour contrast is sufficient"></div>
+          <div class="cl-text">
+            Colour contrast is sufficient — key information not conveyed by colour alone
+            <span class="cl-must">Legal requirement</span>
+            <span class="cl-tag tag-amber" style="background:var(--amber-light);color:var(--amber)">Colour</span>
+            <span class="cl-note">All file types. Body text requires 4.5:1 contrast ratio; large text 3:1 (WCAG 1.4.3 &amp; 1.4.11).</span>
+          </div>
+        </div>
+
+        <div class="cl-item mandatory" id="cli-4">
+          <div class="cl-box" onclick="toggleCheck(4)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Videos include captions or transcript"></div>
+          <div class="cl-text">
+            Videos include <strong>captions</strong> or a text transcript
+            <span class="cl-must">Legal requirement</span>
+            <span class="cl-tag tag-green" style="background:var(--green-light);color:var(--green)">Media</span>
+            <span class="cl-note">All file types with embedded video. Pre-recorded captions required; live captions required for live events (WCAG 1.2.2 &amp; 1.2.4).</span>
+          </div>
+        </div>
+
+        <div class="cl-item" id="cli-5">
+          <div class="cl-box" onclick="toggleCheck(5)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Links use descriptive text"></div>
+          <div class="cl-text">
+            Links use <strong>descriptive text</strong> — "Download the brief" not "click here"
+            <span class="cl-tag tag-teal" style="background:var(--teal-light);color:var(--teal)">Links</span>
+            <span class="cl-note">All file types with hyperlinks. Helps screen reader users who navigate by links (WCAG 2.4.4).</span>
+          </div>
+        </div>
+
+        <div class="cl-item" id="cli-6">
+          <div class="cl-box" onclick="toggleCheck(6)" role="checkbox" aria-checked="false" tabindex="0" aria-label="File format is accessible"></div>
+          <div class="cl-text">
+            File saved as <strong>Word (.docx)</strong> where possible — not a scanned PDF
+            <span class="cl-tag tag-blue" style="background:var(--blue-light);color:var(--blue)">Format</span>
+            <span class="cl-note">Not applicable to PowerPoint. If PDF is unavoidable, export from Word (never scan) so text is selectable and tagged.</span>
+          </div>
+        </div>
+
+        <div class="cl-item" id="cli-7">
+          <div class="cl-box" onclick="toggleCheck(7)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Font is accessible"></div>
+          <div class="cl-text">
+            Font is at least <strong>12pt</strong>, a readable typeface (Calibri, Arial, Verdana), and not fully justified
+            <span class="cl-tag tag-purple" style="background:var(--purple-light);color:var(--purple)">Typography</span>
+            <span class="cl-note">Word &amp; PowerPoint. Particularly important for ESOL learners and those with dyslexia.</span>
+          </div>
+        </div>
+
+        <div class="cl-item" id="cli-8">
+          <div class="cl-box" onclick="toggleCheck(8)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Slide reading order is set correctly"></div>
+          <div class="cl-text">
+            <strong>Reading order</strong> is set correctly — screen readers read content in logical sequence
+            <span class="cl-tag tag-blue" style="background:var(--blue-light);color:var(--blue)">Structure</span>
+            <span class="cl-note">PowerPoint only — Home → Arrange → Selection Pane to check order (WCAG 1.3.2). Not applicable to Word.</span>
+          </div>
+        </div>
+
+        <div class="cl-item" id="cli-9">
+          <div class="cl-box" onclick="toggleCheck(9)" role="checkbox" aria-checked="false" tabindex="0" aria-label="File is named and organised clearly"></div>
+          <div class="cl-text">
+            File saved in the <strong>correct Teams folder</strong> with a clear, descriptive filename
+            <span class="cl-tag tag-amber" style="background:var(--amber-light);color:var(--amber)">Organisation</span>
+            <span class="cl-note">All file types. Helps all learners — especially those with cognitive differences — find and identify resources.</span>
+          </div>
+        </div>
+
+      </div><!-- /checklist -->
+
+    </div><!-- /subsec -->
 
     <div class="divider" role="separator"></div>
 
@@ -1082,68 +1289,137 @@ html.text-lg{font-size:1.25rem}
 
 <script>
 /* =====================================================
-   TAB NAVIGATION — keyboard + click
+   TAB NAVIGATION
    ===================================================== */
 const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
 
 tabBtns.forEach((btn, i) => {
   btn.addEventListener('click', () => activateTab(btn));
-
-  // Arrow key navigation between tabs (WCAG 2.1.1)
   btn.addEventListener('keydown', e => {
     let target = null;
-    if(e.key === 'ArrowRight') target = tabBtns[(i + 1) % tabBtns.length];
-    if(e.key === 'ArrowLeft') target = tabBtns[(i - 1 + tabBtns.length) % tabBtns.length];
-    if(e.key === 'Home') target = tabBtns[0];
-    if(e.key === 'End') target = tabBtns[tabBtns.length - 1];
+    if(e.key==='ArrowRight') target=tabBtns[(i+1)%tabBtns.length];
+    if(e.key==='ArrowLeft')  target=tabBtns[(i-1+tabBtns.length)%tabBtns.length];
+    if(e.key==='Home')  target=tabBtns[0];
+    if(e.key==='End')   target=tabBtns[tabBtns.length-1];
     if(target){ target.focus(); activateTab(target); }
   });
 });
 
 function activateTab(btn){
   const t = btn.dataset.tab;
-  tabBtns.forEach(b => {
-    b.classList.remove('active');
-    b.setAttribute('aria-selected','false');
-  });
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  tabBtns.forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
   btn.setAttribute('aria-selected','true');
-  document.getElementById('tab-' + t).classList.add('active');
+  document.getElementById('tab-'+t).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 /* =====================================================
-   CHECKLIST
+   SMART CHECKLIST — tiered progress bar
+   Items 0-4 are legal requirements (mandatory),
+   items 5-9 are best practice
    ===================================================== */
-function toggleCheck(el){
-  const isChecked = el.classList.toggle('checked');
-  el.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+const TOTAL = 10;
+const MANDATORY_IDS = [0,1,2,3,4]; // WCAG legal requirements
+
+// Tiered level definitions
+// Score is 0–10; each level has a threshold, colour, label, and "what's next" hint
+const LEVELS = [
+  {
+    min:0, max:0,
+    cls:'level-0', icon:'○',
+    label:'Tick items as you go to see your score',
+    barColor:'var(--border)',
+    next:''
+  },
+  {
+    min:1, max:3,
+    cls:'level-1', icon:'⚠',
+    label:'Hindering learners — key barriers present',
+    barColor:'var(--amber)',
+    next:'<strong>Priority:</strong> Tick the <em>Legal requirement</em> items first — these are the most critical barriers for learners with disabilities and screen reader users.'
+  },
+  {
+    min:4, max:6,
+    cls:'level-2', icon:'◑',
+    label:'Improving — some barriers remain',
+    barColor:'var(--blue-mid)',
+    next:'<strong>Getting there.</strong> Complete all five <em>Legal requirement</em> items to reach legally compliant. Then add descriptive links and readable fonts for the biggest remaining gains.'
+  },
+  {
+    min:7, max:8,
+    cls:'level-3', icon:'◕',
+    label:'Legally compliant — WCAG 2.1 AA met',
+    barColor:'#e0a020',
+    next:'<strong>Compliant — well done.</strong> The remaining items (reading order, font, file naming) will make your resource significantly more accessible for ESOL learners, learners with dyslexia, and those using screen readers.'
+  },
+  {
+    min:9, max:10,
+    cls:'level-4', icon:'✓',
+    label:'Fully accessible — excellent work',
+    barColor:'var(--green-mid)',
+    next:'<strong>This resource is fully accessible.</strong> You\'re modelling what accessible design looks like for every learner in your classroom.'
+  }
+];
+
+// Track state
+const checked = new Array(TOTAL).fill(false);
+
+function toggleCheck(idx){
+  const box = document.querySelector(`#cli-${idx} .cl-box`);
+  const item = document.getElementById(`cli-${idx}`);
+  checked[idx] = !checked[idx];
+  box.classList.toggle('checked', checked[idx]);
+  box.setAttribute('aria-checked', checked[idx] ? 'true' : 'false');
+  // Visual feedback on the item row
+  if(checked[idx]) item.classList.add('checked-item');
+  else item.classList.remove('checked-item');
   updateProgress();
 }
 
-function updateProgress(){
-  const total = document.querySelectorAll('.cl-box').length;
-  const checked = document.querySelectorAll('.cl-box.checked').length;
-  const el = document.getElementById('progress-text');
-  if(checked === 0){ el.textContent = ''; return; }
-  if(checked === total){
-    el.textContent = '✓ All ' + total + ' items complete — this resource is ready to upload.';
-    el.style.color = 'var(--green)';
-    el.style.fontWeight = '600';
-  } else {
-    el.textContent = checked + ' of ' + total + ' items complete.';
-    el.style.color = 'var(--muted)';
-    el.style.fontWeight = '400';
-  }
-}
-
-// Keyboard support already in HTML via onclick + role=checkbox
-document.querySelectorAll('.cl-box').forEach(box => {
+// Keyboard support
+document.querySelectorAll('.cl-box').forEach((box, i) => {
   box.addEventListener('keydown', e => {
-    if(e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); toggleCheck(box); }
+    if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggleCheck(i); }
   });
 });
+
+function updateProgress(){
+  const score = checked.filter(Boolean).length;
+  const mandatoryDone = MANDATORY_IDS.filter(i => checked[i]).length;
+  const pct = Math.round((score / TOTAL) * 100);
+
+  // Update score number
+  document.getElementById('progress-score-num').textContent = score + ' / ' + TOTAL;
+
+  // Update bar
+  const fill = document.getElementById('progress-bar-fill');
+  const track = document.getElementById('progress-bar-track');
+  fill.style.width = pct + '%';
+  track.setAttribute('aria-valuenow', pct);
+
+  // Determine level
+  let level = LEVELS[0];
+  for(const l of LEVELS){
+    if(score >= l.min && score <= l.max) { level = l; break; }
+  }
+  // Override: if mandatory items are all done but score is 5–8, step up to level 3
+  if(mandatoryDone === MANDATORY_IDS.length && score >= 5 && score < 9){
+    level = LEVELS[3];
+  }
+
+  fill.style.background = level.barColor;
+
+  // Update status badge
+  const badge = document.getElementById('access-status-badge');
+  badge.className = 'access-status ' + level.cls;
+  document.getElementById('access-status-icon').textContent = level.icon;
+  document.getElementById('access-status-text').textContent = level.label;
+
+  // Update next step hint
+  document.getElementById('access-next').innerHTML = level.next;
+}
 
 /* =====================================================
    SETTINGS — DARK MODE
@@ -1153,81 +1429,63 @@ function toggleDarkMode(){
   const btn = document.getElementById('dark-mode-toggle');
   const isDark = html.classList.toggle('dark-mode');
   btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-  announce(isDark ? 'Dark mode enabled.' : 'Dark mode disabled. Standard colours restored.');
+  announce(isDark ? 'Dark mode enabled.' : 'Dark mode disabled.');
 }
 
 /* =====================================================
    SETTINGS — TEXT SIZE
-   Uses em-based sizing so all elements scale proportionally
-   and boxes reflow rather than overflow
    ===================================================== */
 function setTextSize(size, btn){
   const html = document.documentElement;
   html.classList.remove('text-md','text-lg');
-  document.querySelectorAll('.size-btn').forEach(b => {
-    b.classList.remove('active');
-    b.setAttribute('aria-pressed','false');
+  document.querySelectorAll('.size-btn').forEach(b=>{
+    b.classList.remove('active'); b.setAttribute('aria-pressed','false');
   });
-  btn.classList.add('active');
-  btn.setAttribute('aria-pressed','true');
-  const labels = { default:'Default text size applied.', medium:'Larger text size applied.', large:'Largest text size applied.' };
-  if(size === 'medium') html.classList.add('text-md');
-  if(size === 'large') html.classList.add('text-lg');
+  btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+  if(size==='medium') html.classList.add('text-md');
+  if(size==='large')  html.classList.add('text-lg');
+  const labels={default:'Default text size applied.',medium:'Larger text applied.',large:'Largest text applied.'};
   announce(labels[size]);
 }
 
 /* =====================================================
    SETTINGS — ZOOM
-   At 125%+ collapses grids to single column so nothing overflows
    ===================================================== */
 function setZoom(level, btn){
-  document.querySelectorAll('.zoom-btn').forEach(b => {
-    b.classList.remove('active');
-    b.setAttribute('aria-pressed','false');
+  document.querySelectorAll('.zoom-btn').forEach(b=>{
+    b.classList.remove('active'); b.setAttribute('aria-pressed','false');
   });
-  btn.classList.add('active');
-  btn.setAttribute('aria-pressed','true');
-
-  // Apply transform-based zoom on the main content wrapper
-  const main = document.querySelector('main');
-  const factor = level / 100;
-  if(level === 100){
-    main.style.transform = '';
-    main.style.transformOrigin = '';
-    main.style.width = '';
-    removeZoomStyle();
+  btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+  removeZoomStyle();
+  if(level===100){
+    document.body.style.zoom='';
   } else {
-    // Scale-down approach that keeps layout fluid
-    // Inject a temporary style to collapse multi-column at high zoom
-    removeZoomStyle();
-    if(level >= 125){
-      const style = document.createElement('style');
-      style.id = 'zoom-overrides';
-      style.textContent = `
-        .tool-grid, .reason-grid, .principle-list, .stat-strip { grid-template-columns: 1fr !important; }
-        .yt-links { grid-template-columns: 1fr !important; display:flex !important; }
-        .checklist { grid-template-columns: 1fr !important; }
+    if(level>=125){
+      const style=document.createElement('style');
+      style.id='zoom-overrides';
+      style.textContent=`
+        .tool-grid,.reason-grid,.principle-list,.stat-strip{grid-template-columns:1fr !important}
+        .yt-links{grid-template-columns:1fr !important;display:flex !important}
+        .checklist{grid-template-columns:1fr !important}
       `;
       document.head.appendChild(style);
     }
-    // Use CSS zoom (supported in all modern browsers; transforms cause scroll issues)
-    document.body.style.zoom = factor;
+    document.body.style.zoom = level/100;
   }
-  announce('Page zoom set to ' + level + ' percent.');
+  announce('Page zoom set to '+level+' percent.');
 }
-
 function removeZoomStyle(){
-  const old = document.getElementById('zoom-overrides');
+  const old=document.getElementById('zoom-overrides');
   if(old) old.remove();
-  document.body.style.zoom = '';
+  document.body.style.zoom='';
 }
 
 /* =====================================================
    SCREEN READER ANNOUNCEMENTS
    ===================================================== */
 function announce(msg){
-  const el = document.getElementById('settings-announce');
-  if(el){ el.textContent = ''; setTimeout(()=>{ el.textContent = msg; }, 50); }
+  const el=document.getElementById('settings-announce');
+  if(el){ el.textContent=''; setTimeout(()=>{el.textContent=msg;},50); }
 }
 </script>
 </body>

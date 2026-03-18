@@ -14,12 +14,23 @@
     --teal:#0f6e56;--teal-light:#e1f5ee;--teal-mid:#1d9e75;
     --amber:#854f0b;--amber-light:#faeeda;--amber-mid:#ba7517;
     --text:#0f2645;--muted:#5a6b7c;--border:rgba(15,38,69,0.11);--surface:#f7fafd;--white:#fff;
+    --content-max:1200px;
+    --gutter:clamp(1.25rem,4vw,3rem);
   }
-  body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text);min-height:100vh}
+  html,body{height:100%}
+  body{
+    font-family:'DM Sans',sans-serif;
+    background:var(--surface);
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
 
   /* HERO */
-  .hero{background:var(--navy);padding:2.75rem 2.5rem 2.25rem;position:relative;overflow:hidden}
-  .hero::after{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(46,127,207,0.12)}
+  .hero{background:var(--navy);position:relative;overflow:hidden}
+  .hero::after{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(46,127,207,0.12);pointer-events:none}
+  .hero-inner{max-width:var(--content-max);margin:0 auto;padding:2.75rem var(--gutter) 2.25rem}
   .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(46,127,207,0.22);color:#9fc8f0;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:1rem}
   .hero-dot{width:6px;height:6px;border-radius:50%;background:#2e7fcf}
   .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4.5vw,2.8rem);color:#fff;line-height:1.1;margin-bottom:.6rem}
@@ -33,13 +44,15 @@
   /* TABS */
   .tab-bar{background:var(--white);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:100;box-shadow:0 1px 0 var(--border)}
   .tab-bar::-webkit-scrollbar{display:none}
-  .tab-btn{background:none;border:none;border-bottom:2.5px solid transparent;padding:.9rem 1.5rem .8rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:8px;transition:color .2s,border-color .2s}
+  .tab-bar-inner{max-width:var(--content-max);margin:0 auto;display:flex;width:100%}
+  .tab-btn{background:none;border:none;border-bottom:2.5px solid transparent;padding:.9rem 1.5rem .8rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:8px;transition:color .2s,border-color .2s;min-height:48px}
   .tab-btn svg{width:15px;height:15px;flex-shrink:0;opacity:.5;transition:opacity .2s}
   .tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
   .tab-btn.active svg{opacity:1}
   .tab-btn:hover:not(.active){color:var(--text)}
-  .tab-panel{display:none;padding:2rem 2.5rem 3.5rem;max-width:860px}
+  .tab-panel{display:none}
   .tab-panel.active{display:block}
+  .tab-panel-inner{max-width:var(--content-max);margin:0 auto;padding:2rem var(--gutter) 3.5rem}
 
   /* TYPOGRAPHY */
   .sec-label{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:.4rem}
@@ -109,20 +122,34 @@
   .divider{height:1px;background:var(--border);margin:2rem 0}
 
   /* FOOTER STRIP */
-  .footer-strip{background:var(--navy);padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-strip{background:var(--navy);margin-top:auto}
+  .footer-strip-inner{max-width:var(--content-max);margin:0 auto;padding:1.25rem var(--gutter);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
   .fs-text{font-size:12px;color:#6a90ad}
   .fs-text strong{color:#9fc8f0}
 
-  @media(max-width:580px){
-    .hero,.tab-panel,.footer-strip{padding-left:1.25rem;padding-right:1.25rem}
+  @media(max-width:640px){
+    .hero-inner,.tab-panel-inner,.footer-strip-inner{padding-left:1.25rem;padding-right:1.25rem}
     .tab-btn{padding:.875rem .875rem .75rem;font-size:12px}
     .hero-meta{gap:1rem}
+    .tool-table{display:block;overflow-x:auto}
+  }
+
+  /* On larger screens, use two-column grid for tool cards and reason cards */
+  @media(min-width:900px){
+    .tool-grid{grid-template-columns:1fr 1fr}
+    .reason-grid{grid-template-columns:1fr 1fr}
+    .principle-list{grid-template-columns:1fr 1fr}
+    .yt-links{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+  }
+  @media(min-width:1100px){
+    .stat-strip{grid-template-columns:repeat(4,1fr)}
   }
 </style>
 </head>
 <body>
 
 <div class="hero">
+  <div class="hero-inner">
   <div class="hero-eyebrow"><div class="hero-dot"></div>Weston College · Staff Resource · March 2026</div>
   <h1>Digitally Accessible<br><em>by Design</em></h1>
   <p class="hero-sub">A practical guide to the free Microsoft tools that make digital learning work for every learner — and the philosophy that makes it sustainable.</p>
@@ -131,9 +158,11 @@
     <div class="hero-stat"><span class="hs-num">£0</span><span class="hs-label">additional cost</span></div>
     <div class="hero-stat"><span class="hs-num">30 min</span><span class="hs-label">to start making a difference</span></div>
   </div>
+  </div>
 </div>
 
 <nav class="tab-bar">
+  <div class="tab-bar-inner">
   <button class="tab-btn active" data-tab="rationale">
     <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v4M8 11v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
     Why it matters
@@ -146,10 +175,12 @@
     <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8h5M5.5 5.5h5M5.5 10.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
     Accessible by design
   </button>
+  </div>
 </nav>
 
 <!-- TAB 1: RATIONALE -->
 <div class="tab-panel active" id="tab-rationale">
+  <div class="tab-panel-inner">
   <p class="sec-label">The case for change</p>
   <h2 class="sec-title">Why digital accessibility matters — right now</h2>
   <p class="sec-lead">Digital exclusion isn't a niche concern. It affects some of our most vulnerable learners every single day — and the tools to address it are already on your laptop.</p>
@@ -244,10 +275,12 @@
       </a>
     </div>
   </div>
+  </div><!-- /tab-panel-inner -->
 </div>
 
 <!-- TAB 2: QUICK WINS -->
 <div class="tab-panel" id="tab-quickwins">
+  <div class="tab-panel-inner">
   <p class="sec-label">Free tools · Maximum impact</p>
   <h2 class="sec-title">Your Microsoft quick win arsenal</h2>
   <p class="sec-lead">Six tools. All free. All already in your Microsoft 365 licence. Each one removes a real barrier for a real learner in your classroom — starting today.</p>
@@ -456,10 +489,12 @@
   <div class="callout green">
     <strong>All six tools are already in your Microsoft 365 Education licence.</strong> No procurement. No budget request. No IT ticket. The only thing standing between your learners and these tools is the next 30 minutes.
   </div>
+  </div><!-- /tab-panel-inner -->
 </div>
 
 <!-- TAB 3: ACCESSIBLE BY DESIGN -->
 <div class="tab-panel" id="tab-philosophy">
+  <div class="tab-panel-inner">
   <p class="sec-label">The philosophy</p>
   <h2 class="sec-title">Accessible by design — not by afterthought</h2>
   <p class="sec-lead">Accessibility is not a feature you add at the end. It is a mindset you bring to the beginning. Here is what that means in practice — and how to make it second nature.</p>
@@ -564,12 +599,15 @@
   <div class="callout">
     <strong>Remember:</strong> You don't need to do everything at once. Pick one tool from the Quick Wins tab. Use it in one lesson this week. Then run the Accessibility Checker on one document before you next upload it. Small habits, compounded across every member of staff, transform what learners experience every day.
   </div>
+  </div><!-- /tab-panel-inner -->
 </div>
 
-<div class="footer-strip">
-  <span class="fs-text"><strong>Weston College</strong> · Learning Without Barriers · Digital Inclusion Strategy · March 2026</span>
-  <span class="fs-text">Part of the <strong>Digitally Accessible by Design</strong> staff CPD programme</span>
-</div>
+<footer class="footer-strip">
+  <div class="footer-strip-inner">
+    <span class="fs-text"><strong>Weston College</strong> · Learning Without Barriers · Digital Inclusion Strategy · March 2026</span>
+    <span class="fs-text">Part of the <strong>Digitally Accessible by Design</strong> staff CPD programme</span>
+  </div>
+</footer>
 
 <script>
   document.querySelectorAll('.tab-btn').forEach(btn=>{

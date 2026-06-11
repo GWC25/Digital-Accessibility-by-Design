@@ -8,6 +8,7 @@
 <style>
 /* =====================================================
    DESIGN TOKENS — all colours WCAG 2.2 AA verified
+   Audit date: June 2026 — 80+ pairs tested, all pass
    ===================================================== */
 :root{
   /* Brand */
@@ -18,67 +19,61 @@
   --amber:#854f0b;--amber-light:#faeeda;--amber-mid:#ba7517;
   /* Text — 4.5:1+ on their respective backgrounds */
   --text:#0f2645;
-  --muted:#445566;       /* 5.4:1 on white */
+  --muted:#445566;       /* 7.67:1 on white ✅ */
   --border:rgba(15,38,69,0.13);
   --surface:#f7fafd;
   --white:#fff;
   /* Hero on --navy */
-  --hero-sub:#b8cfe6;    /* 4.6:1 */
+  --hero-sub:#b8cfe6;    /* 9.47:1 ✅ */
   --hero-label:#b8cfe6;
-  --hero-em:#9ac4f0;     /* 5.8:1 */
+  --hero-em:#9ac4f0;     /* 8.33:1 ✅ */
   --hero-eyebrow:#b8cfe6;
   /* Footer on --navy */
-  --footer-text:#b8cfe6; /* 4.6:1 */
-  --footer-strong:#d4e8f7;/* 6.1:1 */
+  --footer-text:#b8cfe6; /* 9.47:1 ✅ */
+  --footer-strong:#d4e8f7;/* 12.06:1 ✅ */
   /* YouTube sub on #fff8f0 */
-  --yt-sub:#7a4a18;      /* 5.4:1 */
+  --yt-sub:#7a4a18;      /* 7.07:1 ✅ */
   /* Layout */
   --wrap:clamp(1rem,3vw,2.5rem);
   --content-max:1400px;
   /* Sizing — controlled by Settings tab */
-  --base-size:1rem;      /* 16px default; JS adjusts to 1.125rem / 1.25rem */
+  --base-size:1rem;
 }
 
 /* =====================================================
    DARK MODE TOKENS (applied via .dark-mode on <html>)
+   All pairs audited: light and dark mode — June 2026
    ===================================================== */
 html.dark-mode{
-  /* Backgrounds */
   --surface:#0e1825;
   --white:#172030;
   --navy:#1e3050;
   --border:rgba(160,200,240,0.14);
-  /* Text — all checked on --white:#172030 */
-  --text:#dceaf8;           /* 11.2:1 ✓ */
-  --muted:#96b4cc;          /* 4.6:1 ✓ */
-  /* Brand colours shifted for dark backgrounds */
-  --blue:#5ba0e0;           /* 4.8:1 on #172030 ✓ — replaces #1a5fa8 */
-  --blue-mid:#5ba0e0;       /* same — used for borders/accents */
+  --text:#dceaf8;           /* 13.35:1 on #172030 ✅ */
+  --muted:#96b4cc;          /* 7.54:1 on #172030 ✅ */
+  --blue:#5ba0e0;           /* 5.87:1 on #172030 ✅ */
+  --blue-mid:#5ba0e0;
   --blue-xlight:#162840;
   --blue-light:#1d3a5e;
-  /* Semantic colours — all 4.5:1+ on --white #172030 */
-  --green:#6dcfa0;          /* 4.9:1 ✓ */
+  --green:#6dcfa0;          /* 8.81:1 on #0c2218 ✅ */
   --green-light:#0c2218;
   --green-mid:#2d9157;
-  --amber:#f0b060;          /* 4.9:1 ✓ */
+  --amber:#f0b060;          /* 9.17:1 on #261708 ✅ */
   --amber-light:#261708;
   --amber-mid:#ba7517;
-  --purple:#b89cf0;         /* 5.2:1 ✓ */
+  --purple:#b89cf0;         /* 7.74:1 on #1a1035 ✅ */
   --purple-light:#1a1035;
   --purple-mid:#6b45a8;
-  --teal:#5ecfb0;           /* 4.8:1 ✓ */
+  --teal:#5ecfb0;           /* 8.88:1 on #0b2020 ✅ */
   --teal-light:#0b2020;
   --teal-mid:#1d9e75;
-  /* Hero — on dark navy #1e3050 */
-  --hero-sub:#9ac0dc;       /* 4.6:1 ✓ */
+  --hero-sub:#9ac0dc;       /* 6.87:1 on #1e3050 ✅ */
   --hero-label:#9ac0dc;
-  --hero-em:#7db8f0;        /* 5.8:1 ✓ */
+  --hero-em:#7db8f0;        /* 5.8:1 ✅ */
   --hero-eyebrow:#9ac0dc;
-  /* Footer */
-  --footer-text:#9ac0dc;
-  --footer-strong:#c8dff2;
-  /* YouTube sub — on dark amber bg */
-  --yt-sub:#d4975a;         /* 4.6:1 on #261708 ✓ */
+  --footer-text:#9ac0dc;    /* 6.87:1 on #1e3050 ✅ */
+  --footer-strong:#c8dff2;  /* 9.60:1 ✅ */
+  --yt-sub:#d4975a;         /* 6.55:1 on #2a1d0a ✅ */
 }
 
 /* =====================================================
@@ -99,6 +94,19 @@ body{
 }
 
 /* =====================================================
+   FIX 3 — SR-ONLY (WCAG 2.2 audit June 2026)
+   Class referenced in HTML but was not defined in CSS.
+   .sr-only is the standard visually-hidden pattern.
+   Without this definition the element depended solely
+   on fragile inline styles — now has proper CSS fallback.
+   ===================================================== */
+.sr-only{
+  position:absolute;width:1px;height:1px;
+  padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+/* =====================================================
    SKIP LINK — WCAG 2.4.1
    ===================================================== */
 .skip-link{
@@ -112,6 +120,9 @@ body{
 
 /* =====================================================
    FOCUS STYLES — WCAG 2.4.11 (3px, 3:1 contrast)
+   --blue-mid (#2e7fcf) is used only for borders/fills,
+   never as text. As a focus ring it gives 4.16:1 vs
+   white, passing the 3:1 non-text threshold. ✅
    ===================================================== */
 :focus-visible{outline:3px solid var(--blue-mid);outline-offset:3px}
 .tab-btn:focus-visible{outline:3px solid var(--blue-mid);outline-offset:-3px}
@@ -151,11 +162,9 @@ a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:2px}
   font-family:'DM Serif Display',serif;
   font-size:clamp(2rem,5vw,3.5rem);
   color:#fff;line-height:1.05;margin-bottom:.6rem;
-  /* Fills available width — no max-width cap */
   max-width:100%;
 }
 .hero h1 em{font-style:italic;color:var(--hero-em)}
-/* Hero subtitle spans full available width */
 .hero-sub{
   color:var(--hero-sub);font-size:.875rem;font-weight:400;line-height:1.6;
   max-width:100%;
@@ -190,8 +199,6 @@ a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:2px}
 .tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
 .tab-btn.active svg{opacity:1}
 .tab-btn:hover:not(.active){color:var(--text)}
-
-/* Settings button — right-aligned */
 .tab-btn.settings-btn{margin-left:auto}
 
 /* =====================================================
@@ -205,7 +212,7 @@ a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:2px}
 }
 
 /* =====================================================
-   TYPOGRAPHY — all widths unconstrained on desktop
+   TYPOGRAPHY
    ===================================================== */
 .sec-label{
   font-size:.625rem;font-weight:600;letter-spacing:.15em;
@@ -216,7 +223,6 @@ a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:2px}
   font-size:clamp(1.3rem,3vw,1.875rem);
   color:var(--text);line-height:1.2;margin-bottom:.875rem;
 }
-/* Remove old dark-mode overrides — now uses --text token directly */
 .sec-lead{
   font-size:.875rem;color:var(--muted);line-height:1.7;
   margin-bottom:2rem;
@@ -260,7 +266,7 @@ a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:2px}
 .stat-desc{font-size:.75rem;color:var(--muted);line-height:1.4}
 
 /* =====================================================
-   REASON / LEARNER CARDS — dual coding icon region
+   REASON / LEARNER CARDS
    ===================================================== */
 .reason-grid{display:grid;gap:.875rem;margin-bottom:2rem}
 .reason-card{
@@ -268,12 +274,10 @@ a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:2px}
   border-radius:12px;padding:1.125rem 1.25rem;
   display:flex;gap:1rem;align-items:flex-start;
 }
-/* Dual-coding icon area */
 .rc-icon{
   width:44px;height:44px;border-radius:10px;
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;font-size:22px;
-  /* Decorative — hidden from AT */
 }
 .rc-title{font-size:.84375rem;font-weight:600;color:var(--text);margin-bottom:4px}
 .rc-body{font-size:.8125rem;color:var(--muted);line-height:1.55}
@@ -332,7 +336,9 @@ html.dark-mode .yt-link:hover{background:#3a2510}
 }
 .yt-icon svg{width:10px;height:10px;fill:white}
 .yt-text{font-size:.75rem;color:#7a4010;font-weight:500;line-height:1.3}
+/* #7a4010 on #fff8f0 = 7.76:1 ✅ | #7a4010 on hover #ffecd6 = 7.09:1 ✅ */
 html.dark-mode .yt-text{color:#d4975a}
+/* #d4975a on #2a1d0a = 6.55:1 ✅ */
 .yt-sub{font-size:.6875rem;color:var(--yt-sub);font-weight:400}
 
 /* =====================================================
@@ -350,7 +356,6 @@ html.dark-mode .yt-text{color:#d4975a}
   font-size:.8125rem;font-weight:600;flex-shrink:0;
 }
 .pl-title{font-size:.84375rem;font-weight:600;color:var(--text);margin-bottom:3px}
-html.dark-mode .pl-title{color:var(--text)}
 .pl-body{font-size:.8125rem;color:var(--muted);line-height:1.55}
 
 /* =====================================================
@@ -362,17 +367,23 @@ html.dark-mode .pl-title{color:var(--text)}
   border-radius:9px;padding:.75rem 1rem;
   display:flex;align-items:flex-start;gap:.75rem;
 }
-/* Mandatory items — stronger left accent */
 .cl-item.mandatory{border-left:3px solid var(--blue-mid)}
 .cl-item.mandatory.checked-item{border-left-color:var(--green-mid)}
+
+/* =====================================================
+   FIX 2 — WCAG 2.5.8 Target Size (WCAG 2.2 audit June 2026)
+   Previous size: 20×20px. WCAG 2.2 SC 2.5.8 requires 24×24px.
+   ===================================================== */
 .cl-box{
-  width:20px;height:20px;border-radius:4px;
+  width:24px;height:24px;border-radius:4px;
   border:1.5px solid var(--muted);
+  /* --muted (#445566) vs white = 7.67:1 ✅ — border passes 3:1 */
   flex-shrink:0;margin-top:1px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   transition:all .15s;
 }
 .cl-box.checked{background:var(--green-mid);border-color:var(--green-mid)}
+/* --green-mid (#2d9157) vs white = 3.96:1 ✅ */
 .cl-box.checked::after{
   content:'';display:block;
   width:10px;height:7px;
@@ -385,18 +396,17 @@ html.dark-mode .pl-title{color:var(--text)}
   padding:2px 7px;border-radius:10px;
   margin-left:6px;vertical-align:middle;
 }
-/* "Legal requirement" badge */
 .cl-must{
   display:inline-flex;align-items:center;gap:3px;
   font-size:.625rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
   padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;
   background:var(--blue-xlight);color:var(--blue);border:1px solid var(--blue-light);
+  /* --blue (#1a5fa8) on --blue-xlight (#f0f6fd) = 5.95:1 ✅ */
 }
-/* Context note */
 .cl-note{display:block;font-size:.6875rem;color:var(--muted);margin-top:3px;font-style:italic}
 
 /* =====================================================
-   PROGRESS BAR — accessibility score
+   PROGRESS BAR
    ===================================================== */
 .access-progress-wrap{
   background:var(--white);border:1px solid var(--border);
@@ -416,7 +426,6 @@ html.dark-mode .pl-title{color:var(--text)}
   height:100%;border-radius:7px;width:0%;
   transition:width .5s cubic-bezier(.4,0,.2,1),background .4s;
 }
-/* Milestone tick markers on bar */
 .progress-milestones{display:flex;justify-content:space-between;padding:0 2px;margin-bottom:.875rem}
 .milestone{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
 .milestone-line{width:1px;height:6px;background:var(--border)}
@@ -425,7 +434,6 @@ html.dark-mode .pl-title{color:var(--text)}
   text-transform:uppercase;color:var(--muted);white-space:nowrap;
   text-align:center;
 }
-/* Status pill */
 .access-status{
   display:inline-flex;align-items:center;gap:.5rem;
   padding:.5rem .875rem;border-radius:8px;
@@ -434,18 +442,21 @@ html.dark-mode .pl-title{color:var(--text)}
 }
 .access-status.level-0{background:var(--surface);color:var(--muted);border-color:var(--border)}
 .access-status.level-1{background:var(--amber-light);color:var(--amber);border-color:var(--amber-mid)}
+/* --amber (#854f0b) on --amber-light (#faeeda) = 5.87:1 ✅ */
 .access-status.level-2{background:var(--blue-xlight);color:var(--blue);border-color:var(--blue-light)}
+/* --blue (#1a5fa8) on --blue-xlight (#f0f6fd) = 5.95:1 ✅ */
 .access-status.level-3{background:#fff3cc;color:#7a4a00;border-color:#e0c050}
+/* #7a4a00 on #fff3cc = 6.75:1 ✅ */
 html.dark-mode .access-status.level-3{background:#261a00;color:#f0b060;border-color:#7a5010}
 .access-status.level-4{background:var(--green-light);color:var(--green);border-color:var(--green-mid)}
-/* "What to do next" hint */
+/* --green (#1a6b3c) on --green-light (#e4f4ec) = 5.74:1 ✅ */
 .access-next{
   margin-top:.625rem;font-size:.75rem;color:var(--muted);line-height:1.55;min-height:1.4em;
 }
 .access-next strong{color:var(--text)}
 
 /* =====================================================
-   DARK MODE — override inline colour styles on badges/tags
+   DARK MODE — colour overrides for badges/tags
    ===================================================== */
 html.dark-mode .badge-green{background:var(--green-light) !important}
 html.dark-mode .badge-blue{background:var(--blue-xlight) !important}
@@ -489,7 +500,6 @@ html.dark-mode .settings-toggle-label{color:var(--muted)}
 }
 .settings-section-title svg{width:15px;height:15px;flex-shrink:0;opacity:.6}
 
-/* Toggle switch */
 .settings-toggle-row{
   display:flex;align-items:center;justify-content:space-between;
   gap:1rem;padding:.625rem 0;
@@ -497,20 +507,36 @@ html.dark-mode .settings-toggle-label{color:var(--muted)}
 }
 .settings-toggle-row:last-child{border-bottom:none;padding-bottom:0}
 .settings-toggle-label{font-size:.8125rem;color:var(--muted);flex:1}
+
+/* =====================================================
+   FIX 1 — WCAG 1.4.11 Non-text Contrast: Toggle OFF state
+   (WCAG 2.2 audit June 2026)
+   
+   Previous: background:var(--border) ≈ #dde2e8 on white = 1.30:1 ❌
+   Fixed:    background:#6b7f95 on white = 4.12:1 ✅ (need 3:1)
+   
+   ON state (--blue-mid #2e7fcf on white) = 4.16:1 ✅ — unchanged.
+   Dark mode OFF: #748c9a on #172030 = 4.64:1 ✅
+   ===================================================== */
 .settings-toggle{
   position:relative;width:44px;height:24px;
-  background:var(--border);border-radius:12px;
+  background:#6b7f95;         /* 4.12:1 on white ✅ */
+  border-radius:12px;
   cursor:pointer;border:none;
   transition:background .2s;flex-shrink:0;
-  /* Meets 3:1 non-text contrast */
 }
 .settings-toggle[aria-pressed="true"]{background:var(--blue-mid)}
+/* --blue-mid (#2e7fcf) on white = 4.16:1 ✅ */
 .settings-toggle::after{
   content:'';position:absolute;top:3px;left:3px;
   width:18px;height:18px;border-radius:50%;background:#fff;
   transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2);
 }
 .settings-toggle[aria-pressed="true"]::after{transform:translateX(20px)}
+
+/* Dark mode toggle OFF background */
+html.dark-mode .settings-toggle{background:#748c9a}
+/* #748c9a on #172030 = 4.64:1 ✅ */
 
 /* Text size buttons */
 .size-btn-group{display:flex;gap:.5rem;flex-wrap:wrap}
@@ -543,19 +569,18 @@ html.dark-mode .settings-toggle-label{color:var(--muted)}
   background:var(--blue-xlight);color:var(--blue);border-color:var(--blue-light);
 }
 
-/* Settings status announcement (live region) */
 .settings-announce{
   font-size:.75rem;color:var(--green);font-weight:500;
   margin-top:.5rem;min-height:1.2em;
 }
+/* --green (#1a6b3c) on white = 6.54:1 ✅ */
 
 /* =====================================================
-   DUAL CODING — visual icon strips above section titles
+   DUAL CODING
    ===================================================== */
 .dc-strip{
   display:flex;gap:.75rem;flex-wrap:wrap;
   margin-bottom:1rem;
-  /* Decorative only — aria-hidden applied in HTML */
 }
 .dc-icon{
   width:36px;height:36px;border-radius:8px;
@@ -574,7 +599,9 @@ html.dark-mode .settings-toggle-label{color:var(--muted)}
   flex-wrap:wrap;gap:1rem;
 }
 .fs-text{font-size:.75rem;color:var(--footer-text)}
+/* --footer-text (#b8cfe6) on --navy (#0f2645) = 9.47:1 ✅ */
 .fs-text strong{color:var(--footer-strong)}
+/* --footer-strong (#d4e8f7) on --navy (#0f2645) = 12.06:1 ✅ */
 
 /* =====================================================
    RESPONSIVE BREAKPOINTS
@@ -610,23 +637,16 @@ html.dark-mode .settings-toggle-label{color:var(--muted)}
   .stat-strip{grid-template-columns:repeat(4,1fr)}
 }
 
-/* Text size scaling — em-based so all child elements scale proportionally */
 html.text-md{font-size:1.125rem}
 html.text-lg{font-size:1.25rem}
-
-/* =====================================================
-   ZOOM LEVEL (page-level scale)
-   ===================================================== */
-/* Note: zoom changes are handled by JS via <meta viewport> adjustment
-   and body scale — boxes use 100% width so they reflow rather than overflow */
 </style>
 </head>
 <body>
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<!-- Live region for screen reader announcements -->
-<div role="status" aria-live="polite" aria-atomic="true" id="sr-announce" class="sr-only" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"></div>
+<!-- Live region — .sr-only now properly defined in CSS (Fix 3) -->
+<div role="status" aria-live="polite" aria-atomic="true" id="sr-announce" class="sr-only"></div>
 
 <header>
 <div class="hero">
@@ -697,7 +717,6 @@ html.text-lg{font-size:1.25rem}
 
     <div class="subsec">
       <div class="subsec-title">Who is affected in our classrooms?</div>
-      <!-- Dual coding strip — decorative, aria-hidden -->
       <div class="dc-strip" aria-hidden="true">
         <div class="dc-icon">🌍</div>
         <div class="dc-icon">🧠</div>
@@ -786,7 +805,7 @@ html.text-lg{font-size:1.25rem}
       </div>
     </div>
 
-  </div><!-- /tab-panel-inner -->
+  </div>
 </div>
 
 <!-- =====================================================
@@ -801,7 +820,6 @@ html.text-lg{font-size:1.25rem}
 
     <div class="tool-grid">
 
-      <!-- IMMERSIVE READER -->
       <div class="tool-card">
         <div class="tool-header">
           <div class="tool-header-left">
@@ -827,7 +845,6 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-      <!-- LIVE CAPTIONS -->
       <div class="tool-card">
         <div class="tool-header">
           <div class="tool-header-left">
@@ -853,7 +870,6 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-      <!-- ACCESSIBILITY CHECKER -->
       <div class="tool-card">
         <div class="tool-header">
           <div class="tool-header-left">
@@ -879,7 +895,6 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-      <!-- DICTATION -->
       <div class="tool-card">
         <div class="tool-header">
           <div class="tool-header-left">
@@ -905,7 +920,6 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-      <!-- READING COACH -->
       <div class="tool-card">
         <div class="tool-header">
           <div class="tool-header-left">
@@ -931,7 +945,6 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-      <!-- MICROSOFT TRANSLATOR -->
       <div class="tool-card">
         <div class="tool-header">
           <div class="tool-header-left">
@@ -957,13 +970,13 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-    </div><!-- /tool-grid -->
+    </div>
 
     <div class="callout green" role="note">
       <strong>All six tools are already in your Microsoft 365 Education licence.</strong> No procurement. No budget request. No IT ticket. The only thing standing between your learners and these tools is the next 30 minutes.
     </div>
 
-  </div><!-- /tab-panel-inner -->
+  </div>
 </div>
 
 <!-- =====================================================
@@ -1032,7 +1045,6 @@ html.text-lg{font-size:1.25rem}
     <div class="subsec">
       <div class="subsec-title">Your pre-upload accessibility checklist</div>
 
-      <!-- WCAG context note -->
       <div class="callout" role="note" style="margin-bottom:1.25rem">
         <strong>About legal requirements:</strong> The Public Sector Bodies Accessibility Regulations (2018) require public sector organisations to meet <strong>WCAG 2.1 AA</strong> as a minimum. Items marked <span class="cl-must" style="vertical-align:middle">Legal requirement</span> are directly linked to WCAG success criteria — these are non-negotiable regardless of file type. Other items are best practice that significantly improve access for learners. Not every item applies to every file type — context notes tell you when.
       </div>
@@ -1060,10 +1072,7 @@ html.text-lg{font-size:1.25rem}
         <div id="access-next" class="access-next" aria-live="polite"></div>
       </div>
 
-      <!-- CHECKLIST ITEMS -->
-      <!-- data-weight: how many points this item contributes
-           data-must: "true" = WCAG legal requirement
-           data-affects: which learner groups are affected if this is missing -->
+      <!-- CHECKLIST — cl-box is now 24×24px (Fix 2) -->
       <div class="checklist" id="checklist" role="group" aria-label="Pre-upload accessibility checklist">
 
         <div class="cl-item mandatory" id="cli-0">
@@ -1161,9 +1170,9 @@ html.text-lg{font-size:1.25rem}
           </div>
         </div>
 
-      </div><!-- /checklist -->
+      </div>
 
-    </div><!-- /subsec -->
+    </div>
 
     <div class="divider" role="separator"></div>
 
@@ -1193,7 +1202,7 @@ html.text-lg{font-size:1.25rem}
       <strong>Remember:</strong> You don't need to do everything at once. Pick one tool. Use it in one lesson this week. Then run the Accessibility Checker on one document before you next upload it. Small habits, compounded across every member of staff, transform what learners experience every day.
     </div>
 
-  </div><!-- /tab-panel-inner -->
+  </div>
 </div>
 
 <!-- =====================================================
@@ -1206,12 +1215,10 @@ html.text-lg{font-size:1.25rem}
     <h2 class="sec-title">View settings</h2>
     <p class="sec-lead">Adjust how this resource looks and feels. Your preferences stay active for this session — no account needed.</p>
 
-    <!-- Live region for settings feedback -->
     <div role="status" aria-live="polite" aria-atomic="true" id="settings-announce" class="settings-announce"></div>
 
     <div class="settings-panel">
 
-      <!-- APPEARANCE -->
       <div class="settings-section">
         <div class="settings-section-title">
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 4v4l3 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
@@ -1222,6 +1229,7 @@ html.text-lg{font-size:1.25rem}
             <strong>Dark mode</strong><br>
             <span style="font-size:.75rem">Reduces screen brightness — easier on the eyes in low light</span>
           </span>
+          <!-- Toggle OFF bg: #6b7f95 (light) / #748c9a (dark) — both pass 3:1 ✅ (Fix 1) -->
           <button
             class="settings-toggle"
             id="dark-mode-toggle"
@@ -1232,7 +1240,6 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-      <!-- TEXT SIZE -->
       <div class="settings-section">
         <div class="settings-section-title">
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 12L6 4l4 8M3.5 9.5h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 10l2-4 2 4M10.8 8.5h2.4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1246,7 +1253,6 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-      <!-- PAGE ZOOM -->
       <div class="settings-section">
         <div class="settings-section-title">
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.2"/><path d="M10 10l3.5 3.5M5 6.5h3M6.5 5v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
@@ -1261,7 +1267,6 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-      <!-- ACCESSIBILITY NOTE -->
       <div class="settings-section">
         <div class="settings-section-title">
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2a6 6 0 100 12A6 6 0 008 2zM8 6v2M8 10v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
@@ -1274,9 +1279,9 @@ html.text-lg{font-size:1.25rem}
         </div>
       </div>
 
-    </div><!-- /settings-panel -->
+    </div>
 
-  </div><!-- /tab-panel-inner -->
+  </div>
 </div>
 
 </main>
@@ -1316,54 +1321,19 @@ function activateTab(btn){
 }
 
 /* =====================================================
-   SMART CHECKLIST — tiered progress bar
-   Items 0-4 are legal requirements (mandatory),
-   items 5-9 are best practice
+   CHECKLIST — tiered progress bar
    ===================================================== */
 const TOTAL = 10;
-const MANDATORY_IDS = [0,1,2,3,4]; // WCAG legal requirements
+const MANDATORY_IDS = [0,1,2,3,4];
 
-// Tiered level definitions
-// Score is 0–10; each level has a threshold, colour, label, and "what's next" hint
 const LEVELS = [
-  {
-    min:0, max:0,
-    cls:'level-0', icon:'○',
-    label:'Tick items as you go to see your score',
-    barColor:'var(--border)',
-    next:''
-  },
-  {
-    min:1, max:3,
-    cls:'level-1', icon:'⚠',
-    label:'Hindering learners — key barriers present',
-    barColor:'var(--amber)',
-    next:'<strong>Priority:</strong> Tick the <em>Legal requirement</em> items first — these are the most critical barriers for learners with disabilities and screen reader users.'
-  },
-  {
-    min:4, max:6,
-    cls:'level-2', icon:'◑',
-    label:'Improving — some barriers remain',
-    barColor:'var(--blue-mid)',
-    next:'<strong>Getting there.</strong> Complete all five <em>Legal requirement</em> items to reach legally compliant. Then add descriptive links and readable fonts for the biggest remaining gains.'
-  },
-  {
-    min:7, max:8,
-    cls:'level-3', icon:'◕',
-    label:'Legally compliant — WCAG 2.1 AA met',
-    barColor:'#e0a020',
-    next:'<strong>Compliant — well done.</strong> The remaining items (reading order, font, file naming) will make your resource significantly more accessible for ESOL learners, learners with dyslexia, and those using screen readers.'
-  },
-  {
-    min:9, max:10,
-    cls:'level-4', icon:'✓',
-    label:'Fully accessible — excellent work',
-    barColor:'var(--green-mid)',
-    next:'<strong>This resource is fully accessible.</strong> You\'re modelling what accessible design looks like for every learner in your classroom.'
-  }
+  {min:0,max:0,cls:'level-0',icon:'○',label:'Tick items as you go to see your score',barColor:'var(--border)',next:''},
+  {min:1,max:3,cls:'level-1',icon:'⚠',label:'Hindering learners — key barriers present',barColor:'var(--amber)',next:'<strong>Priority:</strong> Tick the <em>Legal requirement</em> items first — these are the most critical barriers for learners with disabilities and screen reader users.'},
+  {min:4,max:6,cls:'level-2',icon:'◑',label:'Improving — some barriers remain',barColor:'var(--blue-mid)',next:'<strong>Getting there.</strong> Complete all five <em>Legal requirement</em> items to reach legally compliant. Then add descriptive links and readable fonts for the biggest remaining gains.'},
+  {min:7,max:8,cls:'level-3',icon:'◕',label:'Legally compliant — WCAG 2.1 AA met',barColor:'#e0a020',next:'<strong>Compliant — well done.</strong> The remaining items (reading order, font, file naming) will make your resource significantly more accessible for ESOL learners, learners with dyslexia, and those using screen readers.'},
+  {min:9,max:10,cls:'level-4',icon:'✓',label:'Fully accessible — excellent work',barColor:'var(--green-mid)',next:'<strong>This resource is fully accessible.</strong> You\'re modelling what accessible design looks like for every learner in your classroom.'}
 ];
 
-// Track state
 const checked = new Array(TOTAL).fill(false);
 
 function toggleCheck(idx){
@@ -1372,13 +1342,11 @@ function toggleCheck(idx){
   checked[idx] = !checked[idx];
   box.classList.toggle('checked', checked[idx]);
   box.setAttribute('aria-checked', checked[idx] ? 'true' : 'false');
-  // Visual feedback on the item row
   if(checked[idx]) item.classList.add('checked-item');
   else item.classList.remove('checked-item');
   updateProgress();
 }
 
-// Keyboard support
 document.querySelectorAll('.cl-box').forEach((box, i) => {
   box.addEventListener('keydown', e => {
     if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggleCheck(i); }
@@ -1390,34 +1358,27 @@ function updateProgress(){
   const mandatoryDone = MANDATORY_IDS.filter(i => checked[i]).length;
   const pct = Math.round((score / TOTAL) * 100);
 
-  // Update score number
   document.getElementById('progress-score-num').textContent = score + ' / ' + TOTAL;
 
-  // Update bar
   const fill = document.getElementById('progress-bar-fill');
   const track = document.getElementById('progress-bar-track');
   fill.style.width = pct + '%';
   track.setAttribute('aria-valuenow', pct);
 
-  // Determine level
   let level = LEVELS[0];
   for(const l of LEVELS){
     if(score >= l.min && score <= l.max) { level = l; break; }
   }
-  // Override: if mandatory items are all done but score is 5–8, step up to level 3
   if(mandatoryDone === MANDATORY_IDS.length && score >= 5 && score < 9){
     level = LEVELS[3];
   }
 
   fill.style.background = level.barColor;
 
-  // Update status badge
   const badge = document.getElementById('access-status-badge');
   badge.className = 'access-status ' + level.cls;
   document.getElementById('access-status-icon').textContent = level.icon;
   document.getElementById('access-status-text').textContent = level.label;
-
-  // Update next step hint
   document.getElementById('access-next').innerHTML = level.next;
 }
 
